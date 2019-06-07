@@ -44,7 +44,32 @@ class App extends Component {
   // function to calculate the answer
   calculateAnswer = () => {
     console.log( `Ready to calculate total.` );
-    
+
+    if( this.state.operation === '+' ){
+      let total = Number(this.state.firstNum) + Number(this.state.secondNum);
+
+      this.setState({
+        answer: total,
+      })
+    } else if( this.state.operation === '-' ){
+      let total = Number(this.state.firstNum) - Number(this.state.secondNum);
+
+      this.setState({
+        answer: total,
+      })
+    } else if( this.state.operation === '*' ){
+      let total = Number(this.state.firstNum) * Number(this.state.secondNum);
+
+      this.setState({
+        answer: total,
+      })
+    } else if( this.state.operation === '/' ){
+      let total = Number(this.state.firstNum) / Number(this.state.secondNum);
+
+      this.setState({
+        answer: total,
+      })
+    }
   }
 
   render(){
@@ -52,7 +77,7 @@ class App extends Component {
       <div className="App">
 
         <div className="calculator" >
-          <p className="display">Answer</p>
+          <p className="display"> :{this.state.answer}</p>
           <br/>
 
           <button onClick={this.handleValue} value="7" >7</button>
