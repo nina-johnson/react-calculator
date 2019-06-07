@@ -36,9 +36,21 @@ class App extends Component {
   handleOperation = (event) => {
     event.preventDefault();
     console.log( `Operation selected:`, event.target.value );
-    this.setState({
-      operation: event.target.value,
-    })
+
+    if( this.state.answer === ''){
+      this.setState({
+        ...this.state,
+        operation: event.target.value,
+      })
+    } else {
+      this.setState({
+        ...this.state, 
+        firstNum: this.state.answer,
+        secondNum: '',
+        operation: event.target.value,
+        answer: ''
+      })
+    }
   }
 
   // function to calculate the answer
@@ -49,35 +61,59 @@ class App extends Component {
       let total = Number(this.state.firstNum) + Number(this.state.secondNum);
 
       this.setState({
+        ...this.state,
         answer: total,
       })
     } else if( this.state.operation === '-' ){
       let total = Number(this.state.firstNum) - Number(this.state.secondNum);
 
       this.setState({
+        ...this.state,
         answer: total,
       })
     } else if( this.state.operation === '*' ){
       let total = Number(this.state.firstNum) * Number(this.state.secondNum);
 
       this.setState({
+        ...this.state,
         answer: total,
       })
     } else if( this.state.operation === '/' ){
       let total = Number(this.state.firstNum) / Number(this.state.secondNum);
 
       this.setState({
+        ...this.state,
         answer: total,
       })
     }
   }
 
+  // on click of "C" button, state is reset
+  clearState = () => {
+    this.setState({
+      firstNum: '',
+      secondNum: '',
+      operation: '',
+      answer: ''
+    })
+  }
+
   render(){
+    let display;
+    if( this.state.answer === '' ){
+      display = <span>{this.state.firstNum} {this.state.operation} {this.state.secondNum}</span>
+    } else {
+      display = <span>{this.state.answer}</span>
+    }
+
     return (
       <div className="App">
 
         <div className="calculator" >
-          <p className="display"> :{this.state.answer}</p>
+          <p className="display"> {display}</p>
+          <br/>
+
+          <button className="clear" onClick={this.clearState} >C</button>
           <br/>
 
           <button onClick={this.handleValue} value="7" >7</button>
