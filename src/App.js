@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
+import PreviousCalculations from './PreviousCalculations';
 
 class App extends Component {
 
@@ -27,9 +28,6 @@ class App extends Component {
         secondNum: this.state.secondNum + event.target.value,
       })
     }
-
-    console.log( `First number is:`, this.state.firstNum );
-    console.log( `Second number is:`, this.state.secondNum );
   }
 
   // function stores selected operator in state
@@ -141,10 +139,7 @@ class App extends Component {
 
         </div>
 
-        <div className="history" >
-          <h2>Previous Calculations</h2>
-          {/* Map through answers here */}
-        </div>
+        <PreviousCalculations />
       </div>
     );
   }
