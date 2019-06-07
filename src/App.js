@@ -6,11 +6,27 @@ class App extends Component {
   state = {
     firstNum: '',
     secondNum: '',
+    operation: '',
     answer: ''
   }
 
+  // function to store values in state
+  handleValue = (event) => {
+    event.preventDefault();
+    console.log( `Button clicked:`, event.target.value );
+    
+  }
+
+  handleOperation = (event) => {
+    event.preventDefault();
+    console.log( `Operation selected:`, event.target.value );
+    
+  }
+
+  // function to calculate the answer
   calculateAnswer = () => {
-    // this will be a function that does the calculation.
+    console.log( `Ready to calculate total.` );
+    
   }
 
   render(){
@@ -21,28 +37,28 @@ class App extends Component {
           <p className="display">Answer</p>
           <br/>
 
-          <button className="num" value="7" >7</button>
-          <button className="num" value="8" >8</button>
-          <button className="num" value="9" >9</button>
-          <button className="operation" value="/" >/</button>
+          <button onClick={this.handleValue} value="7" >7</button>
+          <button onClick={this.handleValue} value="8" >8</button>
+          <button onClick={this.handleValue} value="9" >9</button>
+          <button onClick={this.handleOperation} value="/" >/</button>
           <br/>
 
-          <button className="num" value="4" >4</button>
-          <button className="num" value="5" >5</button>
-          <button className="num" value="6" >6</button>
-          <button className="operation" value="*" >*</button>
+          <button onClick={this.handleValue} value="4" >4</button>
+          <button onClick={this.handleValue} value="5" >5</button>
+          <button onClick={this.handleValue} value="6" >6</button>
+          <button onClick={this.handleOperation} value="*" >*</button>
           <br/>
 
-          <button className="num" value="1" >1</button>
-          <button className="num" value="2" >2</button>
-          <button className="num" value="3" >3</button>
-          <button className="operation" value="-" >-</button>
+          <button onClick={this.handleValue} value="1" >1</button>
+          <button onClick={this.handleValue} value="2" >2</button>
+          <button onClick={this.handleValue} value="3" >3</button>
+          <button onClick={this.handleOperation} value="-" >-</button>
           <br/>
 
-          <button className="num" value="0" >0</button>
-          <button className="num" value="." >.</button>
+          <button onClick={this.handleValue} value="0" >0</button>
+          <button onClick={this.handleValue} value="." >.</button>
           <button onClick={this.calculateAnswer} >=</button>
-          <button className="operation" value="+" >+</button>
+          <button onClick={this.handleOperation} value="+" >+</button>
 
         </div>
 
