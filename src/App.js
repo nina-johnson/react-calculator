@@ -15,12 +15,30 @@ class App extends Component {
     event.preventDefault();
     console.log( `Button clicked:`, event.target.value );
     
+    // conditionally set state based on whether an operator has been selected
+    if( this.state.operation === '' ){
+      this.setState({
+        ...this.state, 
+        firstNum: this.state.firstNum + event.target.value,
+      })
+    } else {
+      this.setState({
+        ...this.state, 
+        secondNum: this.state.secondNum + event.target.value,
+      })
+    }
+
+    console.log( `First number is:`, this.state.firstNum );
+    console.log( `Second number is:`, this.state.secondNum );
   }
 
+  // function stores selected operator in state
   handleOperation = (event) => {
     event.preventDefault();
     console.log( `Operation selected:`, event.target.value );
-    
+    this.setState({
+      operation: event.target.value,
+    })
   }
 
   // function to calculate the answer
