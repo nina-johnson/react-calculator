@@ -1,37 +1,58 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
+class App extends Component {
 
-      <div className="calculator" >
-        <button className="num" >7</button>
-        <button className="num" >8</button>
-        <button className="num" >9</button>
-        <button className="operation" >/</button>
-        <br/>
+  state = {
+    firstNum: '',
+    secondNum: '',
+    answer: ''
+  }
 
-        <button className="num" >4</button>
-        <button className="num" >5</button>
-        <button className="num" >6</button>
-        <button className="operation" >*</button>
-        <br/>
+  calculateAnswer = () => {
+    // this will be a function that does the calculation.
+  }
 
-        <button className="num" >1</button>
-        <button className="num" >2</button>
-        <button className="num" >3</button>
-        <button className="operation" >-</button>
-        <br/>
+  render(){
+    return (
+      <div className="App">
 
-        <button className="num" >0</button>
-        <button className="num" >.</button>
-        <button className="num" >=</button>
-        <button className="operation" >+</button>
+        <div className="calculator" >
+          <p className="display">Answer</p>
+          <br/>
 
+          <button className="num" value="7" >7</button>
+          <button className="num" value="8" >8</button>
+          <button className="num" value="9" >9</button>
+          <button className="operation" value="/" >/</button>
+          <br/>
+
+          <button className="num" value="4" >4</button>
+          <button className="num" value="5" >5</button>
+          <button className="num" value="6" >6</button>
+          <button className="operation" value="*" >*</button>
+          <br/>
+
+          <button className="num" value="1" >1</button>
+          <button className="num" value="2" >2</button>
+          <button className="num" value="3" >3</button>
+          <button className="operation" value="-" >-</button>
+          <br/>
+
+          <button className="num" value="0" >0</button>
+          <button className="num" value="." >.</button>
+          <button onClick={this.calculateAnswer} >=</button>
+          <button className="operation" value="+" >+</button>
+
+        </div>
+
+        <div className="history" >
+          <h2>Previous Calculations</h2>
+          {/* Map through answers here */}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;

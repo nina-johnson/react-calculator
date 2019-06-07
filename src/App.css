@@ -1,16 +1,7 @@
 .App {
   text-align: center;
-}
-
-.App-header {
-  background-color: #282c34;
-  /* min-height: 100vh; */
+  font-family: 'Source Code Pro', monospace;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
@@ -21,6 +12,7 @@ button {
   font-size: 24pt;
   border-style: solid;
   border-radius: 5px;
+  border-width: 2px;
   width: 50px;
   height: 50px;
   margin: 5px;
@@ -32,6 +24,28 @@ button {
   border-radius: 10px;
   width: 280px;
   height: 360px;
-  margin-left: 15%;
+  margin: auto;
+  margin-top: 10vh;
+  background-color: #4c6f9b;
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(130, 130, 130);
+}
+
+.display {
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  width: 74%;
+  margin: auto;
+  margin-top: 25px;
+  text-align: right;
+  padding: 10px;
+  font-size: 20pt;
+  background-color: #eceff1;
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+}
+
+.history {
+  width: 40%;
+  margin: auto;
   margin-top: 10vh;
 }
