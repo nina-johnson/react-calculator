@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Axios from 'axios';
+import ClearAllButton from './ClearAllButton';
 
 class Calculator extends Component {
 
@@ -124,9 +125,11 @@ class Calculator extends Component {
 
         return(
             <div className="calculator" >
+                <h4 className="header" >Sezzle Calculator</h4>
                 <p className="display"> {display}</p>
                 <br/>
 
+                <ClearAllButton getCalculations={this.props.getCalculations} />
                 <button className="clear" onClick={this.clearState} >C</button>
                 <br/>
 

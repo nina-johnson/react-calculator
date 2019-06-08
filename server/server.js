@@ -40,6 +40,19 @@ app.post( `/calculations`, (req, res) => {
 
 })
 
+app.delete( `/calculations`, (req, res) => {
+    let sqlText = `DELETE FROM "calculations";`;
+
+    pool.query( sqlText )
+        .then( (response) => {
+            res.sendStatus(200);
+        })
+        .catch( (error) => {
+            console.log( `Error deleting data from table.`, error );
+            res.sendStatus(500);
+        })
+})
+
 // Serve static files
 app.use(express.static('build'));
 
