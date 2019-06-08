@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import PreviousCalculations from './PreviousCalculations';
+import Axios from 'axios';
 
 class App extends Component {
 
@@ -84,6 +85,21 @@ class App extends Component {
         answer: total,
       })
     }
+
+    this.saveCalculation();
+  }
+
+  // on click of "=" button, once answer is calculated, send calculation to database
+  saveCalculation = () => {
+     Axios({
+       method: 'POST',
+       url: '/calculations',
+       data: this.state
+     })
+     .then( (response) => {
+       console.log( `Posted data successfully!` );
+       
+     })
   }
 
   // on click of "C" button, state is reset
