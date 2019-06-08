@@ -1,161 +1,51 @@
 import React, {Component} from 'react';
 import './App.css';
-import PreviousCalculations from './PreviousCalculations';
+// import PreviousCalculations from './PreviousCalculations';
 import Axios from 'axios';
+import Calculator from './Calculator';
 
 class App extends Component {
 
   state = {
-    firstNum: '',
-    secondNum: '',
-    operation: '',
-    answer: ''
+    history: []
   }
 
-  // function to store values in state
-  handleValue = (event) => {
-    event.preventDefault();
-    console.log( `Button clicked:`, event.target.value );
-    
-    // conditionally set state based on whether an operator has been selected
-    if( this.state.operation === '' ){
-      this.setState({
-        ...this.state, 
-        firstNum: this.state.firstNum + event.target.value,
-      })
-    } else {
-      this.setState({
-        ...this.state, 
-        secondNum: this.state.secondNum + event.target.value,
-      })
-    }
+  // on load of application, get prior calculations from database
+  componentDidMount(){
+    this.getCalculations();
   }
 
-  // function stores selected operator in state
-  handleOperation = (event) => {
-    event.preventDefault();
-    console.log( `Operation selected:`, event.target.value );
-
-    if( this.state.answer === ''){
-      this.setState({
-        ...this.state,
-        operation: event.target.value,
-      })
-    } else {
-      this.setState({
-        ...this.state, 
-        firstNum: this.state.answer,
-        secondNum: '',
-        operation: event.target.value,
-        answer: ''
-      })
-    }
-  }
-
-  // function to calculate the answer
-  calculateAnswer = () => {
-    console.log( `Ready to calculate total.` );
-
-    if( this.state.operation === '+' ){
-      let total = Number(this.state.firstNum) + Number(this.state.secondNum);
-
-      this.setState({
-        ...this.state,
-        answer: total,
-      })
-    } else if( this.state.operation === '-' ){
-      let total = Number(this.state.firstNum) - Number(this.state.secondNum);
-
-      this.setState({
-        ...this.state,
-        answer: total,
-      })
-    } else if( this.state.operation === '*' ){
-      let total = Number(this.state.firstNum) * Number(this.state.secondNum);
-
-      this.setState({
-        ...this.state,
-        answer: total,
-      })
-    } else if( this.state.operation === '/' ){
-      let total = Number(this.state.firstNum) / Number(this.state.secondNum);
-
-      this.setState({
-        ...this.state,
-        answer: total,
-      })
-    }
-
-    this.saveCalculation();
-  }
-
-  // on click of "=" button, once answer is calculated, send calculation to database
-  saveCalculation = () => {
-     Axios({
-       method: 'POST',
-       url: '/calculations',
-       data: this.state
-     })
-     .then( (response) => {
-       console.log( `Posted data successfully!` );
-       
-     })
-  }
-
-  // on click of "C" button, state is reset
-  clearState = () => {
-    this.setState({
-      firstNum: '',
-      secondNum: '',
-      operation: '',
-      answer: ''
+  // request to get calculations from database to display in history
+  getCalculations = () => {
+    Axios({
+      method: 'GET',
+      url: '/calculations'
+    })
+    .then( (response) => {
+        console.log( `Received previous calculations:`, response.data );
+        this.setState({
+            history: response.data
+        })
+    })
+    .catch( (error) => {
+        console.log( `Error getting previous calculations.`, error );
+        alert( `Sorry, could not get data at this time. Please try again later.` );
     })
   }
 
   render(){
-    let display;
-    if( this.state.answer === '' ){
-      display = <span>{this.state.firstNum} {this.state.operation} {this.state.secondNum}</span>
-    } else {
-      display = <span>{this.state.answer}</span>
-    }
 
     return (
       <div className="App">
 
-        <div className="calculator" >
-          <p className="display"> {display}</p>
-          <br/>
+        <Calculator getCalculations={this.getCalculations} /> 
 
-          <button className="clear" onClick={this.clearState} >C</button>
-          <br/>
-
-          <button onClick={this.handleValue} value="7" >7</button>
-          <button onClick={this.handleValue} value="8" >8</button>
-          <button onClick={this.handleValue} value="9" >9</button>
-          <button onClick={this.handleOperation} value="/" >/</button>
-          <br/>
-
-          <button onClick={this.handleValue} value="4" >4</button>
-          <button onClick={this.handleValue} value="5" >5</button>
-          <button onClick={this.handleValue} value="6" >6</button>
-          <button onClick={this.handleOperation} value="*" >*</button>
-          <br/>
-
-          <button onClick={this.handleValue} value="1" >1</button>
-          <button onClick={this.handleValue} value="2" >2</button>
-          <button onClick={this.handleValue} value="3" >3</button>
-          <button onClick={this.handleOperation} value="-" >-</button>
-          <br/>
-
-          <button onClick={this.handleValue} value="0" >0</button>
-          <button onClick={this.handleValue} value="." >.</button>
-          <button onClick={this.calculateAnswer} >=</button>
-          <button onClick={this.handleOperation} value="+" >+</button>
-
+        <div className="history" >
+          <h2>Previous Calculations</h2>
+          {this.state.history.map( calc => 
+                  <p key={calc.id}>{calc.firstNum} {calc.operation} {calc.secondNum} = {calc.answer}</p>
+              )}
         </div>
-
-        <PreviousCalculations />
       </div>
     );
   }
