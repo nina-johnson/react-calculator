@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Axios from 'axios';
-import ClearAllButton from './ClearAllButton';
+import ClearAllButton from '../ClearAllButton/ClearAllButton';
 
 class Calculator extends Component {
 
@@ -129,7 +129,7 @@ class Calculator extends Component {
                 <p className="display"> {display}</p>
                 <br/>
 
-                <ClearAllButton getCalculations={this.props.getCalculations} />
+                <ClearAllButton getCalculations={this.props.getCalculations} clearState={this.clearState} />
                 <button className="clear" onClick={this.clearState} >C</button>
                 <br/>
 

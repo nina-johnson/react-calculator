@@ -16,6 +16,8 @@ class ClearAllButton extends Component {
             console.log( `Couldn't remove previous calculations.` );
             alert( `Sorry, could not clear previous calculations. Please try again later.` );
         })
+
+        this.props.clearState();
     }
 
     render() {

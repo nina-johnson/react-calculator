@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 // import PreviousCalculations from './PreviousCalculations';
 import Axios from 'axios';
-import Calculator from './Calculator';
+import Calculator from '../Calculator/Calculator';
 
 class App extends Component {
 
