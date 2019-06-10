@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Request to DB to get previous calculations
 app.get( `/calculations`, (req, res) => {
     let sqlText = `SELECT * FROM "calculations"
-                    ORDER BY "id"
+                    ORDER BY "id" DESC
                     LIMIT 10;`;
 
     pool.query( sqlText )
