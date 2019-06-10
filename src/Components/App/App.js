@@ -13,6 +13,12 @@ class App extends Component {
   // on load of application, get prior calculations from database
   componentDidMount(){
     this.getCalculations();
+
+    this.interval = setInterval(this.getCalculations, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   // request to get calculations from database to display in history
