@@ -32,5 +32,10 @@ To get the development environment running:
 - "AC" button clears saved calculations from database
 
 
+## Deployment
+
+This app has been deployed to: https://pacific-savannah-47788.herokuapp.com/
+
+
 ## Author
 Nina Johnson
